@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+struct Node {
+    int digit;
+    struct Node* next;
+    Node(int digit) {
+        this->digit = digit;
+        next = NULL;
+    }
+};
+struct List {
+    Node* start;
+    List() {start= NULL; }
+    void reverse() {
+        Node* current = start;
+        Node *prev = NULL, *next = NULL;
+ 
+        while (current != NULL) {
+            next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+        }
+        start = prev;
+    }
+    void print() {
+        struct Node* temp = start;
+        while (temp != NULL) {
+            cout << temp->digit << " ";
+            temp = temp->next;
+        }
+    }
+    void push(int digit) {
+        Node* temp = new Node (digit);
+        temp->next = start;
+        start = temp;
+    }
+};
+int main(){
+    List ll;
+    ll.push(1);
+    ll.push(2);
+    ll.push(3);
+    ll.push(4);
+    cout << "Given  list\n";
+    ll.print();
+    ll.reverse();
+    cout << "\nReversed  list \n";
+    ll.print();
+    return 0;
+}
